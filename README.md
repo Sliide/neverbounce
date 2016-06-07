@@ -14,7 +14,7 @@ neverbounce.Init(&neverbounce.NeverBounceCli{
     ApiUsername: "NEVERBOUNCE_USERNAME",  
     ApiPassword: "NEVERBOUNCE_PASSWORD",  
 })                                                   
-neverbounce.ValidateEmail("someemail@example.com")
+neverbounce.VerifyEmail("someemail@example.com")
 
 ```  
 
@@ -31,11 +31,11 @@ neverbounce.Init(&neverbounce.NeverBounceCli{
     TestMode: true,
 })
 
-neverbounce.ValidateEmail("anemail@valid.com")
-neverbounce.ValidateEmail("anemail@invalid.com")
-neverbounce.ValidateEmail("anemail@catchall.com")
-neverbounce.ValidateEmail("anemail@disposable.com")
-neverbounce.ValidateEmail("anemail@unknown.com")
+neverbounce.VerifyEmail("anemail@valid.com")
+neverbounce.VerifyEmail("anemail@invalid.com")
+neverbounce.VerifyEmail("anemail@catchall.com")
+neverbounce.VerifyEmail("anemail@disposable.com")
+neverbounce.VerifyEmail("anemail@unknown.com")
 
 ```
 
