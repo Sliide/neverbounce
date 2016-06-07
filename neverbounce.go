@@ -105,10 +105,18 @@ func (n *NeverBounceCli) VerifyEmail(email string) VerifyEmailResponse {
 }
 
 func VerifyEmail(email string) VerifyEmailResponse {
+	if NeverBounce == nil {
+		log.Fatal("NeverBounce email not initiated.")
+	}
+
 	return NeverBounce.VerifyEmail(email)
 }
 
 func GetAccessToken() string {
+	if NeverBounce == nil {
+		log.Fatal("NeverBounce email not initiated.")
+	}
+
 	return NeverBounce.GetAccessToken()
 }
 
