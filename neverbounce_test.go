@@ -18,6 +18,7 @@ func TestMain(m *testing.M) {
 	neverbounce.Init(&neverbounce.NeverBounceCli{
 		ApiUsername: os.Getenv("NEVERBOUNCE_USERNAME"),
 		ApiPassword: os.Getenv("NEVERBOUNCE_PASSWORD"),
+		TestMode:    true,
 	})
 
 	os.Exit(m.Run())
@@ -28,6 +29,6 @@ func TestNeverBounceGetsAccessToken(t *testing.T) {
 }
 
 func TestNeverBounceVerifiesEmail(t *testing.T) {
-	Assert(t, neverbounce.VerifyEmail("andre@sliideapp.com").Result == 0)
-	Assert(t, neverbounce.VerifyEmail("asasd@allls.com").Result != 0)
+	Assert(t, neverbounce.VerifyEmail("andre@valid.com").Result == 0)
+	Assert(t, neverbounce.VerifyEmail("asasd@invalid.com").Result != 0)
 }

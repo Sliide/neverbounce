@@ -11,26 +11,15 @@ import (
 
 const DEFAULT_API_URL string = "https://api.neverbounce.com/v3"
 
-type AccessTokenResponse struct {
-	AccessToken string `json:"access_token"`
-	Expires     int    `json:"expires"`
-}
-
-type VerifyEmailResponse struct {
-	Success       bool   `json:"success"`
-	Result        int    `json:"result"`
-	ResultDetails int    `json:"result_details"`
-	Msg           string `json:"msg"`
-}
-
 var NeverBounce *NeverBounceCli
 
 type NeverBounceCli struct {
-	ApiUrl string
-
+	ApiUrl      string
 	ApiUsername string
 	ApiPassword string
 	AccessToken string
+
+	TestMode bool
 }
 
 // Sets the API url on the client
@@ -128,7 +117,10 @@ func Init(neverbounce *NeverBounceCli) {
 
 	// In case the API url has not been provided set the default one.
 	// Used for testing
-	if NeverBounce.ApiUrl == "" {
+	if NeverBounce.TestMode {
+		// Set url for default server
+		NeverBounce.SetApiUrl(GetFakeService().URL)
+	} else if NeverBounce.ApiUrl == "" {
 		NeverBounce.SetApiUrl(DEFAULT_API_URL)
 	}
 }
