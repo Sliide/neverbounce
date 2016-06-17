@@ -60,7 +60,6 @@ func GetFakeService() *httptest.Server {
 			ve = VerifyEmailResponse{
 				Success: true,
 				Result:  0,
-				Msg:     "Authentication failed",
 			}
 
 		} else if strings.Contains(email, "@invalid.com") {
