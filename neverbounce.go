@@ -11,6 +11,14 @@ import (
 
 const DEFAULT_API_URL string = "https://api.neverbounce.com/v3"
 
+const (
+	EMAIL_VALID = 0
+	EMAIL_INVALID = 1
+	EMAIL_DISPOSABLE = 2
+	EMAIL_CATCHALL = 3
+	EMAIL_UNKNOWN = 4
+)
+
 var NeverBounce *NeverBounceCli
 
 type NeverBounceCli struct {

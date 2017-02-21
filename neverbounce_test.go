@@ -29,6 +29,6 @@ func TestNeverBounceGetsAccessToken(t *testing.T) {
 }
 
 func TestNeverBounceVerifiesEmail(t *testing.T) {
-	Assert(t, neverbounce.VerifyEmail("andre@valid.com").Result == 0)
-	Assert(t, neverbounce.VerifyEmail("asasd@invalid.com").Result != 0)
+	Assert(t, neverbounce.VerifyEmail("andre@valid.com").Result == neverbounce.EMAIL_VALID)
+	Assert(t, neverbounce.VerifyEmail("asasd@invalid.com").Result != neverbounce.EMAIL_VALID)
 }

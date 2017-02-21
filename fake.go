@@ -59,36 +59,36 @@ func GetFakeService() *httptest.Server {
 		if strings.Contains(email, "@valid.com") {
 			ve = VerifyEmailResponse{
 				Success: true,
-				Result:  0,
+				Result:  EMAIL_VALID,
 			}
 
 		} else if strings.Contains(email, "@invalid.com") {
 			ve = VerifyEmailResponse{
 				Success: true,
-				Result:  1,
+				Result:  EMAIL_INVALID,
 			}
 
 		} else if strings.Contains(email, "@disposable.com") {
 			ve = VerifyEmailResponse{
 				Success: true,
-				Result:  2,
+				Result:  EMAIL_DISPOSABLE,
 			}
 
 		} else if strings.Contains(email, "@catchall.com") {
 			ve = VerifyEmailResponse{
 				Success: true,
-				Result:  3,
+				Result:  EMAIL_CATCHALL,
 			}
 
 		} else if strings.Contains(email, "@unknown.com") {
 			ve = VerifyEmailResponse{
 				Success: true,
-				Result:  4,
+				Result:  EMAIL_UNKNOWN,
 			}
 		} else {
 			ve = VerifyEmailResponse{
 				Success: true,
-				Result:  1,
+				Result:  EMAIL_INVALID,
 			}
 		}
 
