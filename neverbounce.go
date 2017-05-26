@@ -61,14 +61,18 @@ func (n *NeverBounceCli) GetAccessToken() string {
 	var accessTokenResponse AccessTokenResponse
 	decoder := json.NewDecoder(response.Body)
 
-	if response.StatusCode != 200 {
-		log.Panic("Client returned status: ", response.StatusCode)
-		return ""
-	}
-
 	if err := decoder.Decode(&accessTokenResponse); err != nil {
+		if response.StatusCode != 200 {
+			log.Panic("Client returned status: ", response.StatusCode)
+			return ""
+		}
+
 		log.Panic(err)
 	} else {
+		if(len(accessTokenResponse.ErrorDescription) > 0) {
+			log.Panic("Error retrieving access token: ", accessTokenResponse.ErrorDescription)
+		}
+
 		n.AccessToken = accessTokenResponse.AccessToken
 	}
 
@@ -100,12 +104,16 @@ func (n *NeverBounceCli) VerifyEmail(email string) VerifyEmailResponse {
 	}
 
 	if !verifyEmailResponse.Success {
-		if strings.Contains(verifyEmailResponse.Msg, "Authentication failed") {
+		if strings.Contains(verifyEmailResponse.Msg, "Authentication failed") || strings.Contains(verifyEmailResponse.ErrorMsg, "Authentication failed") {
 			log.Println("Email verification failed: ", verifyEmailResponse.Msg)
 			n.GetAccessToken()
 			return n.VerifyEmail(email)
 		} else {
-			return verifyEmailResponse
+			if(len(verifyEmailResponse.ErrorMsg) > 0) {
+				log.Panic("Email Verification failed:", verifyEmailResponse.ErrorMsg)
+			} else {
+				log.Panic("Email Verification failed: ", verifyEmailResponse.Msg)
+			}
 		}
 	}
 
