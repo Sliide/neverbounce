@@ -50,6 +50,7 @@ func (n *NeverBounceCli) GetAccessToken() string {
 	)
 
 	request.SetBasicAuth(n.ApiUsername, n.ApiPassword)
+	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	client := http.Client{}
 
