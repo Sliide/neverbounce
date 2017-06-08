@@ -88,7 +88,7 @@ func GetFakeService() *httptest.Server {
 		} else {
 			ve = VerifyEmailResponse{
 				Success: true,
-				Result:  EMAIL_INVALID,
+				Result:  EMAIL_VALID,
 			}
 		}
 
